@@ -22,8 +22,8 @@ app.post("/login",(req,res)=>{
     db.get("SELECT * FROM users WHERE username = ? AND password = ?",user,password,(err,row)=>{
         if (err) console.log(err)
         else{
-            if (row) res.json({status : 200, msg: "login"})
-            else res.json({status : 401, msg: "error"})
+            if (row) res.json({status : 200, status: "true"})
+            else res.json({status : 401, ok: "false"})
         }
     })
 })
