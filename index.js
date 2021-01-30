@@ -4,7 +4,7 @@ const app = new express()
 app.use(express.json())
 
 
-const db = new sqlite3.Database(':memory:');
+const db = new sqlite3.Database(':memory:') //se metto un percorso di file crea un file che dopo andrà a modificare;
 
 db.serialize(()=> {
   db.run("CREATE TABLE users (username TEXT, password TEXT)");
@@ -18,7 +18,7 @@ db.serialize(()=> {
 
 app.post("/login",(req,res)=>{
     const { user,password } = req.body
-    console.log(req.body)
+
     db.get("SELECT * FROM users WHERE username = ? AND password = ?",user,password,(err,row)=>{
         if (err) console.log(err)
         else{
